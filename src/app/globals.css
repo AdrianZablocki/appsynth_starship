@@ -1,5 +1,6 @@
 :root {
   color-scheme: dark;
+  --appsynth-bar-h: 36px;
   --bg: #03050b;
   --text: #e8edf5;
   --text-strong: #f4f7fb;

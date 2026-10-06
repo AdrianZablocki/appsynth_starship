@@ -5,6 +5,7 @@ import { DICTIONARIES, fill, type Dictionary, type Locale } from "@/i18n/diction
 import { useBrowserLocale } from "@/lib/browser";
 import { eventValues } from "@/lib/format";
 import type { Quality, Sim, Snapshot } from "@/sim/createSim";
+import { AppSynthBar } from "./AppSynthBar";
 import { ControlConsole, type ConsoleActions } from "./ControlConsole";
 import { MissionHud } from "./MissionHud";
 import { SpinnerIcon, WarningIcon } from "./icons";
@@ -140,51 +141,54 @@ export function LaunchSimulator() {
   const toast = snap.toast;
 
   return (
-    <main className={styles.sim}>
-      <canvas ref={canvasRef} className={styles.canvas} aria-label={t.canvasLabel} />
-      <div className={styles.vignette} aria-hidden="true" />
+    <>
+      <AppSynthBar locale={locale} source="starship" />
+      <main className={styles.sim}>
+        <canvas ref={canvasRef} className={styles.canvas} aria-label={t.canvasLabel} />
+        <div className={styles.vignette} aria-hidden="true" />
 
-      <div className={styles.hud}>
-        <MissionHud t={t} locale={locale} onLocaleChange={setPickedLocale} snap={snap} />
-        <ControlConsole t={t} snap={snap} actions={actions} />
-      </div>
-
-      <div className={styles.toastWrap} aria-live="polite">
-        {toast && (
-          <div key={toast.id} className={`${styles.glass} ${styles.toast}`}>
-            <span className={styles.toastTitle}>{t.events[toast.key][0]}</span>
-            <span className={styles.toastSub}>
-              {fill(t.events[toast.key][1], eventValues(locale, toast.key, toast.values))}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {load.stage !== "ready" && load.stage !== "error" && (
-        <div className={styles.overlay}>
-          <div className={`${styles.glass} ${styles.notice}`} role="status" aria-live="polite">
-            <SpinnerIcon className={styles.spin} stroke="var(--accent)" />
-            <div className={styles.noticeText}>
-              <span className={styles.noticeTitle}>{t.loadingTitle}</span>
-              <span className={styles.noticeSub}>{loadingText(t, load)}</span>
-            </div>
-          </div>
+        <div className={styles.hud}>
+          <MissionHud t={t} locale={locale} onLocaleChange={setPickedLocale} snap={snap} />
+          <ControlConsole t={t} snap={snap} actions={actions} />
         </div>
-      )}
 
-      {load.stage === "error" && (
-        <div className={styles.overlay}>
-          <div className={`${styles.glass} ${styles.notice}`} role="alert">
-            <WarningIcon />
-            <div className={styles.noticeText}>
-              <span className={styles.noticeTitle}>{t.errorTitle}</span>
-              <span className={styles.noticeSub}>
-                {load.reason === "network" ? t.errorNetwork : load.reason === "webgl" ? t.errorWebgl : load.detail}
+        <div className={styles.toastWrap} aria-live="polite">
+          {toast && (
+            <div key={toast.id} className={`${styles.glass} ${styles.toast}`}>
+              <span className={styles.toastTitle}>{t.events[toast.key][0]}</span>
+              <span className={styles.toastSub}>
+                {fill(t.events[toast.key][1], eventValues(locale, toast.key, toast.values))}
               </span>
             </div>
-          </div>
+          )}
         </div>
-      )}
-    </main>
+
+        {load.stage !== "ready" && load.stage !== "error" && (
+          <div className={styles.overlay}>
+            <div className={`${styles.glass} ${styles.notice}`} role="status" aria-live="polite">
+              <SpinnerIcon className={styles.spin} stroke="var(--accent)" />
+              <div className={styles.noticeText}>
+                <span className={styles.noticeTitle}>{t.loadingTitle}</span>
+                <span className={styles.noticeSub}>{loadingText(t, load)}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {load.stage === "error" && (
+          <div className={styles.overlay}>
+            <div className={`${styles.glass} ${styles.notice}`} role="alert">
+              <WarningIcon />
+              <div className={styles.noticeText}>
+                <span className={styles.noticeTitle}>{t.errorTitle}</span>
+                <span className={styles.noticeSub}>
+                  {load.reason === "network" ? t.errorNetwork : load.reason === "webgl" ? t.errorWebgl : load.detail}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    </>
   );
 }
