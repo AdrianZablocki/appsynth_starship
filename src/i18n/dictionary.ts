@@ -17,6 +17,9 @@ export interface Dictionary {
   description: string;
   missionLabel: string;
   telemetryLabel: string;
+  /** Mobile toggle for the mission and telemetry cards. */
+  panelsShow: string;
+  panelsHide: string;
   eventsLabel: string;
   met: string;
   ready: string;
@@ -75,6 +78,8 @@ export const DICTIONARIES: Record<Locale, Dictionary> = {
       "Interactive 3D simulation of a Starship flight test: Super Heavy launches from Starbase, flies back and is caught by the tower, while Starship coasts through space, re-enters and splashes down in the Indian Ocean.",
     missionLabel: "Mission",
     telemetryLabel: "Telemetry",
+    panelsShow: "Show mission panels",
+    panelsHide: "Hide mission panels",
     eventsLabel: "Mission events",
     met: "Mission elapsed time",
     ready: "READY",
@@ -208,6 +213,8 @@ export const DICTIONARIES: Record<Locale, Dictionary> = {
       "Interaktywna symulacja 3D lotu testowego Starship: Super Heavy startuje ze Starbase, wraca i zostaje złapany przez wieżę, a Starship leci przez przestrzeń kosmiczną, wchodzi w atmosferę i woduje na Oceanie Indyjskim.",
     missionLabel: "Misja",
     telemetryLabel: "Telemetria",
+    panelsShow: "Pokaż panele misji",
+    panelsHide: "Ukryj panele misji",
     eventsLabel: "Zdarzenia misji",
     met: "Czas misji",
     ready: "GOTOWE",
@@ -341,6 +348,8 @@ export const DICTIONARIES: Record<Locale, Dictionary> = {
       "Interaktive 3D-Simulation eines Starship-Testflugs: Super Heavy startet von Starbase, fliegt zurück und wird vom Turm gefangen, während Starship durch den Weltraum fliegt, wieder eintritt und im Indischen Ozean wassert.",
     missionLabel: "Mission",
     telemetryLabel: "Telemetrie",
+    panelsShow: "Missionsanzeigen einblenden",
+    panelsHide: "Missionsanzeigen ausblenden",
     eventsLabel: "Missionsereignisse",
     met: "Missionszeit",
     ready: "BEREIT",
@@ -474,6 +483,8 @@ export const DICTIONARIES: Record<Locale, Dictionary> = {
       "Simulation 3D interactive d’un vol d’essai Starship : Super Heavy décolle de Starbase, revient et est rattrapé par la tour, tandis que Starship traverse l’espace, rentre dans l’atmosphère et amerrit dans l’océan Indien.",
     missionLabel: "Mission",
     telemetryLabel: "Télémétrie",
+    panelsShow: "Afficher les panneaux de mission",
+    panelsHide: "Masquer les panneaux de mission",
     eventsLabel: "Événements de la mission",
     met: "Temps de mission",
     ready: "PRÊT",

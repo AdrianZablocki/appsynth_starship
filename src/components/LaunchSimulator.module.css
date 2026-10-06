@@ -695,6 +695,31 @@
   }
 }
 
+/* Phones only: collapses the mission and telemetry cards into this pill. */
+.panelToggle {
+  display: none;
+  align-self: flex-start;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px 0 14px;
+  border-radius: 999px;
+  color: var(--text-strong);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.chevron {
+  color: var(--text-soft);
+  transition: transform 0.2s ease;
+}
+
+.panelToggle[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 1600px) {
@@ -721,6 +746,15 @@
 }
 
 @media (max-width: 760px) {
+  .panelToggle {
+    display: inline-flex;
+  }
+  .sim[data-panels="closed"] .rowTop > :not(.panelToggle) {
+    display: none;
+  }
+  .sim[data-panels="closed"] .toastWrap {
+    top: 72px;
+  }
   .rowTop {
     flex-direction: column;
     align-items: stretch;
@@ -827,7 +861,8 @@
 @media (prefers-reduced-motion: reduce) {
   .spin,
   .pulse,
-  .toast {
+  .toast,
+  .chevron {
     animation: none;
   }
 }

@@ -2,7 +2,7 @@ import { DICTIONARIES, LOCALES, fill, type Dictionary, type Locale } from "@/i18
 import type { PhaseTone, Snapshot } from "@/sim/createSim";
 import { EventLog } from "./EventLog";
 import { Telemetry } from "./Telemetry";
-import { RocketIcon } from "./icons";
+import { ChevronIcon, RocketIcon } from "./icons";
 import styles from "./LaunchSimulator.module.css";
 
 const LED: Record<PhaseTone, string> = {
@@ -19,6 +19,9 @@ interface Props {
   locale: Locale;
   onLocaleChange: (locale: Locale) => void;
   snap: Snapshot;
+  /** Whether the cards show on phones; wider screens always show them. */
+  panelsOpen: boolean;
+  onPanelsToggle: () => void;
 }
 
 function phaseText(t: Dictionary, s: Snapshot): string {
@@ -28,11 +31,25 @@ function phaseText(t: Dictionary, s: Snapshot): string {
 }
 
 /** Top row: mission card with the phase light, language switch and event log; telemetry for both vehicles. */
-export function MissionHud({ t, locale, onLocaleChange, snap: s }: Props) {
+export function MissionHud({ t, locale, onLocaleChange, snap: s, panelsOpen, onPanelsToggle }: Props) {
   const pulse = s.tone === "burn" || s.tone === "count";
 
   return (
     <div className={`${styles.row} ${styles.rowTop}`}>
+      <button
+        type="button"
+        className={`${styles.glass} ${styles.panelToggle}`}
+        aria-expanded={panelsOpen}
+        aria-label={panelsOpen ? t.panelsHide : t.panelsShow}
+        onClick={onPanelsToggle}
+      >
+        <span
+          className={`${styles.led} ${pulse ? styles.pulse : ""}`}
+          style={{ "--led": LED[s.tone] } as React.CSSProperties}
+        />
+        {s.met}
+        <ChevronIcon className={styles.chevron} />
+      </button>
       <div className={styles.leftCol}>
         <section className={`${styles.glass} ${styles.mission}`} aria-label={t.missionLabel}>
           <span className={styles.badge}>

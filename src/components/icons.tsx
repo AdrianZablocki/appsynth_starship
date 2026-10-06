@@ -115,3 +115,11 @@ export function WarningIcon() {
     </Stroke>
   );
 }
+
+export function ChevronIcon(props: IconProps) {
+  return (
+    <Stroke size={16} {...props}>
+      <path d="m6 9 6 6 6-6" />
+    </Stroke>
+  );
+}

@@ -56,6 +56,7 @@ export function LaunchSimulator() {
   const [pickedLocale, setPickedLocale] = useState<Locale | null>(null);
   const [load, setLoad] = useState<Load>({ stage: "engine" });
   const [snap, setSnap] = useState<Snapshot>(INITIAL_SNAPSHOT);
+  const [panelsOpen, setPanelsOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const simRef = useRef<Sim | null>(null);
 
@@ -143,12 +144,19 @@ export function LaunchSimulator() {
   return (
     <>
       <AppSynthBar locale={locale} source="starship" />
-      <main className={styles.sim}>
+      <main className={styles.sim} data-panels={panelsOpen ? "open" : "closed"}>
         <canvas ref={canvasRef} className={styles.canvas} aria-label={t.canvasLabel} />
         <div className={styles.vignette} aria-hidden="true" />
 
         <div className={styles.hud}>
-          <MissionHud t={t} locale={locale} onLocaleChange={setPickedLocale} snap={snap} />
+          <MissionHud
+            t={t}
+            locale={locale}
+            onLocaleChange={setPickedLocale}
+            snap={snap}
+            panelsOpen={panelsOpen}
+            onPanelsToggle={() => setPanelsOpen((v) => !v)}
+          />
           <ControlConsole t={t} snap={snap} actions={actions} />
         </div>
 
