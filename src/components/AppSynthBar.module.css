@@ -37,19 +37,10 @@
   opacity: 0.5;
 }
 
-.cta {
+.arrow {
   color: var(--accent);
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.bar:hover .cta {
+.bar:hover .arrow {
   color: var(--accent-soft);
-}
-
-/* Phones: brand and the call to action only. */
-@media (max-width: 640px) {
-  .lead {
-    display: none;
-  }
 }
