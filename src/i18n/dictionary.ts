@@ -75,7 +75,7 @@ export const DICTIONARIES: Record<Locale, Dictionary> = {
     kicker: "Starship flight test",
     h1: "Launch and return",
     description:
-      "Interactive 3D simulation of a Starship flight test: Super Heavy launches from Starbase, flies back and is caught by the tower, while Starship coasts through space, re-enters and splashes down in the Indian Ocean.",
+      "Interactive 3D simulation of a Starship flight test: Super Heavy launches from Starbase and is caught by the tower; Starship re-enters and splashes down.",
     missionLabel: "Mission",
     telemetryLabel: "Telemetry",
     panelsShow: "Show mission panels",
