@@ -2652,7 +2652,9 @@ export function createSim(canvas: HTMLCanvasElement, opts: SimOptions, cb: SimCa
         );
       }
     }
-    if (S.launched && simT > T_SECO + 15 && simT < SH.tEI - 40) {
+    // RCS pulses last a fraction of a second; under time warp the real-time puffs would hang beside the
+    // hull for minutes of mission time, so they only fire near real time.
+    if (S.launched && simT > T_SECO + 15 && simT < SH.tEI - 40 && wCur <= 4) {
       if (realT > rcsNext) {
         rcsBursts.push({
           port: sRcs[Math.floor(Math.random() * sRcs.length)],
@@ -2677,10 +2679,10 @@ export function createSim(canvas: HTMLCanvasElement, opts: SimOptions, cb: SimCa
           pt.d.y * s2 + (Math.random() - 0.5) * 2,
           pt.d.z * s2 + (Math.random() - 0.5) * 2,
           realT,
-          0.6 + Math.random() * 0.4,
-          0.3,
-          2.6,
-          0.5,
+          0.4 + Math.random() * 0.3,
+          0.25,
+          1.8,
+          0.45,
           0.95,
           0.96,
           0.98,
