@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     siteName: en.title,
     title: en.title,
     description: en.description,
+    // Other languages switch in place on this URL, so no og:locale:alternate (it implies separate pages).
     locale: "en_US",
-    alternateLocale: ["pl_PL", "de_DE", "fr_FR"],
   },
   twitter: {
     card: "summary_large_image",

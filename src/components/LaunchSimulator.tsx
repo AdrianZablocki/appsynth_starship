@@ -145,7 +145,7 @@ export function LaunchSimulator() {
     <>
       <AppSynthBar locale={locale} source="starship" />
       <main className={styles.sim} data-panels={panelsOpen ? "open" : "closed"}>
-        <canvas ref={canvasRef} className={styles.canvas} aria-label={t.canvasLabel} />
+        <canvas ref={canvasRef} className={styles.canvas} role="img" aria-label={t.canvasLabel} />
         <div className={styles.vignette} aria-hidden="true" />
 
         <div className={styles.hud}>
